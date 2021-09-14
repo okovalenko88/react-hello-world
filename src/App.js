@@ -1,25 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from "react";
+
+function Button(props) {
+  const handleClick = () => {props.onClickFunction(props.incr)}
+  return (
+    <button onClick={handleClick}>
+      +{props.incr}
+    </button>
+  )
+}
+
+function Display(props) {
+  return (
+    <div>{props.message}</div>  
+  )
+}
 
 function App() {
+  const [counter, setCounter] = useState(10);
+  const incrCounter = (addition) => setCounter(counter + addition);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Button onClickFunction={incrCounter} incr={5} />
+      <Button onClickFunction={incrCounter} incr={10} />
+      <Display message={counter}/>
+    </>
+  )
 }
 
 export default App;
